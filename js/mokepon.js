@@ -1,13 +1,16 @@
+let ataqueJugador = ''
 
 function iniciarJuego() {
     let botonMascotaJugador = document.getElementById('boton-mascota')
-    let botonAtaqueFuego = document.getElementById('boton-fuego')
-    let botonAtaqueAgua = document.getElementById('boton-agua')
-    let botonAtaqueTierra = document.getElementById('boton-tierra')
-
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
+
+    let botonAtaqueFuego = document.getElementById('boton-fuego')
     botonAtaqueFuego.addEventListener('click', ataqueJugadorFuego)
+
+    let botonAtaqueAgua = document.getElementById('boton-agua')
     botonAtaqueAgua.addEventListener('click', ataqueJugadorAgua)
+
+    let botonAtaqueTierra = document.getElementById('boton-tierra')
     botonAtaqueTierra.addEventListener('click', ataqueJugadorTierra)
 }
 
@@ -48,7 +51,6 @@ function seleccionarMascotaJugador() {
     spanMascotaJudador.innerHTML = mascotaJugador
 
     seleccionarMascotaEnemigo()
-    ataqueEnemigo()
 }
 
 function seleccionarMascotaEnemigo() {
@@ -81,19 +83,19 @@ function seleccionarMascotaEnemigo() {
     }
 
     spanMascotaEnemigo.innerHTML = mascotaEnemigo
-
+    ataqueEnemigo()
 }
 
 function ataqueJugadorFuego() {
-    return 'Fuego'
+    ataqueJugador = 'Fuego'
 }
 
 function ataqueJugadorAgua() {
-    return 'Agua'
+    ataqueJugador = 'Agua'
 }
 
 function ataqueJugadorTierra() {
-    return 'Tierra'
+    ataqueJugador = 'Tierra'
 }
 
 function ataqueEnemigo() {
