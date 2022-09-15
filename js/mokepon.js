@@ -54,6 +54,7 @@ function seleccionarMascotaJugador() {
     spanMascotaJudador.innerHTML = mascotaJugador
 
     seleccionarMascotaEnemigo()
+    actualizaVidas()
 }
 
 function seleccionarMascotaEnemigo() {
@@ -89,18 +90,31 @@ function seleccionarMascotaEnemigo() {
 }
 
 function ataqueJugadorFuego() {
-    ataqueJugador = 'Fuego'
-    ataqueAleatorioEnemigo()
+
+    if (vidasJugador > 0 && vidasEnemigo > 0) {
+        ataqueJugador = 'Fuego'
+        ataqueAleatorioEnemigo()
+    } else {
+        mensajeFinJuego()
+    }
 }
 
 function ataqueJugadorAgua() {
-    ataqueJugador = 'Agua'
-    ataqueAleatorioEnemigo()
+    if (vidasJugador > 0 && vidasEnemigo > 0) {
+        ataqueJugador = 'Agua'
+        ataqueAleatorioEnemigo()
+    } else {
+        mensajeFinJuego()
+    }
 }
 
 function ataqueJugadorTierra() {
-    ataqueJugador = 'Tierra'
-    ataqueAleatorioEnemigo()
+    if (vidasJugador > 0 && vidasEnemigo > 0) {
+        ataqueJugador = 'Tierra'
+        ataqueAleatorioEnemigo()
+    } else {
+        mensajeFinJuego()
+    }
 }
 
 function ataqueAleatorioEnemigo() {
@@ -124,8 +138,6 @@ function ataqueAleatorioEnemigo() {
 function creaMensaje(resultado) {
     let parrafo = document.createElement('p')
     let mensaje = document.getElementById('mensaje')
-    let spanVidasJugador = document.getElementById('vidas-jugador')
-    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
 
     parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', la mascota del enemigo ataco con ' + ataqueEnemigo + '. ' + resultado
     mensaje.appendChild(parrafo)
@@ -138,15 +150,36 @@ function combate() {
         resultado = "Empate"
     } else if (ataqueJugador == 'Fuego' && ataqueEnemigo == 'Tierra') {
         resultado = 'Ganaste'
+        vidasEnemigo -= 1
     } else if (ataqueJugador == 'Tierra' && ataqueEnemigo == 'Agua') {
         resultado = 'Ganaste'
+        vidasEnemigo -= 1
     } else if (ataqueJugador == 'Agua' && ataqueEnemigo == 'Fuego') {
+        vidasEnemigo -= 1
         resultado = 'Ganaste'
     } else {
         resultado = 'Perdiste'
+        vidasJugador -= 1
     }
 
+    actualizaVidas()
     return resultado
+}
+
+function actualizaVidas() {
+    let spanVidasJugador = document.getElementById('vidas-jugador')
+    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
+
+    spanVidasJugador.innerHTML = vidasJugador
+    spanVidasEnemigo.innerHTML = vidasEnemigo
+}
+
+function mensajeFinJuego() {
+    if (vidasEnemigo == 0) {
+        alert('Debes reiniciar el juego, el Jugador has GANADO!!.')
+    } else {
+        alert('Debes reiniciar el juego, el Enemigo ha GANADO!!.')
+    }
 }
 
 function aleatorio(min, max) {
