@@ -4,6 +4,9 @@ let vidasJugador = 3
 let vidasEnemigo = 3
 
 function iniciarJuego() {
+    let seccionAtaque = document.getElementById('seleccionar-ataque')
+    seccionAtaque.style.display = 'none'
+
     let botonMascotaJugador = document.getElementById('boton-mascota')
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
@@ -18,6 +21,7 @@ function iniciarJuego() {
 
     let botonReiniciarJuego = document.getElementById('boton-reiniciar')
     botonReiniciarJuego.addEventListener('click', reiniciarJuego)
+    botonReiniciarJuego.style.display = 'none'
 }
 
 function seleccionarMascotaJugador() {
@@ -25,33 +29,22 @@ function seleccionarMascotaJugador() {
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
     let inputRatigueya = document.getElementById('ratigueya')
-    let inputLangostelvis = document.getElementById('langostelvis')
-    let inputTucapalma = document.getElementById('tucapalma')
-    let inputPydos = document.getElementById('pydos')
     let mascotaJugador = ''
 
     if (inputHipodoge.checked) {
         mascotaJugador = 'Hipodoge'
+        mostrarSeccionAtaque()
     }
 
     else if (inputCapipepo.checked) {
         mascotaJugador = 'Capipepo'
+        mostrarSeccionAtaque()
     }
 
     else if (inputRatigueya.checked) {
         mascotaJugador = 'Ratigueya'
-    }
+        mostrarSeccionAtaque()
 
-    else if (inputLangostelvis.checked) {
-        mascotaJugador = 'Langostelvis'
-    }
-
-    else if (inputTucapalma.checked) {
-        mascotaJugador = 'Tucapalma'
-    }
-
-    else if (inputPydos.checked) {
-        mascotaJugador = 'Pydos'
     } else {
         alert('Debes seleccionar una mascota')
     }
@@ -64,9 +57,17 @@ function seleccionarMascotaJugador() {
     }
 }
 
+function mostrarSeccionAtaque() {
+    let seccionAtaque = document.getElementById('seleccionar-ataque')
+    seccionAtaque.style.display = 'block'
+
+    let seccionMascota = document.getElementById('seleccionar-mascota')
+    seccionMascota.style.display = 'none'
+}
+
 function seleccionarMascotaEnemigo() {
     let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
-    let mascotaAleatorio = aleatorio(1, 6)
+    let mascotaAleatorio = aleatorio(1, 3)
     let mascotaEnemigo = ""
 
     if (mascotaAleatorio == 1) {
@@ -81,46 +82,19 @@ function seleccionarMascotaEnemigo() {
         mascotaEnemigo = 'Ratigueya'
     }
 
-    else if (mascotaAleatorio == 4) {
-        mascotaEnemigo = 'Langostelvis'
-    }
-
-    else if (mascotaAleatorio == 5) {
-        mascotaEnemigo = 'Tucapalma'
-    }
-
-    else if (mascotaAleatorio == 6) {
-        mascotaEnemigo = 'Pydos'
-    }
-
     spanMascotaEnemigo.innerHTML = mascotaEnemigo
 }
 
 function ataqueJugadorFuego() {
-    if (vidasJugador > 0 && vidasEnemigo > 0) {
-        ataqueJugador = 'Fuego'
-        ataqueAleatorioEnemigo()
-    } else {
-        mensajeFinJuego()
-    }
+    ataqueAleatorioEnemigo()
 }
 
 function ataqueJugadorAgua() {
-    if (vidasJugador > 0 && vidasEnemigo > 0) {
-        ataqueJugador = 'Agua'
-        ataqueAleatorioEnemigo()
-    } else {
-        mensajeFinJuego()
-    }
+    ataqueAleatorioEnemigo()
 }
 
 function ataqueJugadorTierra() {
-    if (vidasJugador > 0 && vidasEnemigo > 0) {
-        ataqueJugador = 'Tierra'
-        ataqueAleatorioEnemigo()
-    } else {
-        mensajeFinJuego()
-    }
+    ataqueAleatorioEnemigo()
 }
 
 function ataqueAleatorioEnemigo() {
@@ -139,6 +113,8 @@ function ataqueAleatorioEnemigo() {
 
     resultado = combate()
     creaMensaje(resultado)
+
+    revisarVidas()
 }
 
 function creaMensaje(resultado) {
@@ -147,8 +123,6 @@ function creaMensaje(resultado) {
 
     parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', la mascota del enemigo ataco con ' + ataqueEnemigo + '. ' + resultado
     mensaje.appendChild(parrafo)
-
-    mensajeFinJuego()
 }
 
 function creaMensajeFinal(resultadoFinal) {
@@ -158,6 +132,17 @@ function creaMensajeFinal(resultadoFinal) {
     parrafo.innerHTML = resultadoFinal
     mensaje.appendChild(parrafo)
 
+    let botonAtaqueFuego = document.getElementById('boton-fuego')
+    botonAtaqueFuego.disabled = true
+
+    let botonAtaqueAgua = document.getElementById('boton-agua')
+    botonAtaqueAgua.disabled = true
+
+    let botonAtaqueTierra = document.getElementById('boton-tierra')
+    botonAtaqueTierra.disabled = true
+
+    let botonReiniciarJuego = document.getElementById('boton-reiniciar')
+    botonReiniciarJuego.style.display = 'block'
 }
 
 function combate() {
@@ -191,7 +176,7 @@ function actualizaVidas() {
     spanVidasEnemigo.innerHTML = vidasEnemigo
 }
 
-function mensajeFinJuego() {
+function revisarVidas() {
     if (vidasEnemigo == 0) {
         alert('Debes reiniciar el juego, el Jugador has GANADO!!.')
         creaMensajeFinal('FELICITACIONES! Ganaste :D')
@@ -201,9 +186,8 @@ function mensajeFinJuego() {
     }
 }
 
-
 function reiniciarJuego() {
-
+    location.reload()
 }
 
 function aleatorio(min, max) {
