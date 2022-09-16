@@ -15,6 +15,9 @@ function iniciarJuego() {
 
     let botonAtaqueTierra = document.getElementById('boton-tierra')
     botonAtaqueTierra.addEventListener('click', ataqueJugadorTierra)
+
+    let botonReiniciarJuego = document.getElementById('boton-reiniciar')
+    botonReiniciarJuego.addEventListener('click', reiniciarJuego)
 }
 
 function seleccionarMascotaJugador() {
@@ -49,12 +52,16 @@ function seleccionarMascotaJugador() {
 
     else if (inputPydos.checked) {
         mascotaJugador = 'Pydos'
+    } else {
+        alert('Debes seleccionar una mascota')
     }
 
-    spanMascotaJudador.innerHTML = mascotaJugador
+    if (mascotaJugador != '') {
+        spanMascotaJudador.innerHTML = mascotaJugador
 
-    seleccionarMascotaEnemigo()
-    actualizaVidas()
+        seleccionarMascotaEnemigo()
+        actualizaVidas()
+    }
 }
 
 function seleccionarMascotaEnemigo() {
@@ -90,7 +97,6 @@ function seleccionarMascotaEnemigo() {
 }
 
 function ataqueJugadorFuego() {
-
     if (vidasJugador > 0 && vidasEnemigo > 0) {
         ataqueJugador = 'Fuego'
         ataqueAleatorioEnemigo()
@@ -141,6 +147,17 @@ function creaMensaje(resultado) {
 
     parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', la mascota del enemigo ataco con ' + ataqueEnemigo + '. ' + resultado
     mensaje.appendChild(parrafo)
+
+    mensajeFinJuego()
+}
+
+function creaMensajeFinal(resultadoFinal) {
+    let parrafo = document.createElement('p')
+    let mensaje = document.getElementById('mensaje')
+
+    parrafo.innerHTML = resultadoFinal
+    mensaje.appendChild(parrafo)
+
 }
 
 function combate() {
@@ -177,9 +194,16 @@ function actualizaVidas() {
 function mensajeFinJuego() {
     if (vidasEnemigo == 0) {
         alert('Debes reiniciar el juego, el Jugador has GANADO!!.')
-    } else {
+        creaMensajeFinal('FELICITACIONES! Ganaste :D')
+    } else if (vidasJugador == 0) {
         alert('Debes reiniciar el juego, el Enemigo ha GANADO!!.')
+        creaMensajeFinal('Lo siento, perdiste ! ;(')
     }
+}
+
+
+function reiniciarJuego() {
+
 }
 
 function aleatorio(min, max) {
