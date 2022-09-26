@@ -13,23 +13,23 @@
             <h2 class="subtitulo">Elige tu mascota:</h2>
             
             <div class="tarjetas">
+                <input type="radio" name="mascota" id="hipodoge">
                 <label class="tarjeta-de-mokepon" for="hipodoge">
                     <p>Hipodoge</p>
                     <img src="./assets/hipodoge.png" alt="hipodoge">
                 </label>
-                <input type="radio" name="mascota" id="hipodoge">
                 
+                <input type="radio" name="mascota" id="capipepo">
                 <label class="tarjeta-de-mokepon" for="capipepo">
                     <p>Capipepo</p>
                     <img src="./assets/capipepo.png" alt="capipepo">
                 </label>
-                <input type="radio" name="mascota" id="capipepo">
                 
+                <input type="radio" name="mascota" id="ratigueya">            
                 <label class="tarjeta-de-mokepon" for="ratigueya">
                     <p>Ratigueya</p>
                     <img src="./assets/ratigueya.png" alt="ratigueya">
                 </label>
-                <input type="radio" name="mascota" id="ratigueya">            
             </div>
             
             
@@ -37,23 +37,37 @@
         </section>
 
         <section id="seleccionar-ataque">
-            <h1 class="titulo">Mokepon! ​🔥​​​💧​​🌱​​</h1>
+            <h1 class="titulo">Mokepon</h1>
 
-            <h2>Elige tu ataque</h2>
-            <p>Tu macota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador"></span> vidas.</p>
-            <p>La mascota <span id="mascota-enemigo"></span> del enemigo tiene <span id="vidas-enemigo"></span> vidas.</p>
-            <p>
-                <button id="boton-fuego">Fuego 🔥​​​</button>
-                <button id="boton-agua">Agua 💧</button>
-                <button id="boton-tierra">Tierra 🌱</button>
-            </p>
+            <h2 class="subtitulo">Elige tu ataque</h2>
+
+            <div class="tarjetas-ataques">
+                <button id="boton-fuego" class="boton-de-ataque">Fuego 🔥​​​</button>
+                <button id="boton-agua" class="boton-de-ataque">Agua 💧</button>
+                <button id="boton-tierra" class="boton-de-ataque">Tierra 🌱</button>
+            </div>
+
+            <section id="mensajes">
+                <p id="resultado">Mucha suerte</p>
+                <section id="reiniciar">
+                    <button id="boton-reiniciar">Reiniciar</button>
+                </section> 
+            </section>                                
+
+            <div class="ataques">
+                <div>                    
+                    <p id="vidas-jugador"></p>
+                    <p id="mascota-jugador"></p>
+                    <div id="ataques-del-jugador"></div>
+                </div>
+                <div>
+                    <p id="vidas-enemigo"></p>
+                    <p id="mascota-enemigo"></p>
+                    <div id="ataques-del-enemigo"></div>
+                </div>
+            </div>            
         </section>
 
-        <section id="mensaje">
-        </section>
-
-        <section id="reiniciar">
-            <button id="boton-reiniciar">Reiniciar</button>
-        </section>        
+               
     </body>
 </html>
