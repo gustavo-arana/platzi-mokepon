@@ -78,7 +78,7 @@ input:checked+label {
     border-radius: 20px;
     box-sizing: border-box;
     border-color: transparent;
-    width: 180px;
+    width: 80px;
     color: white;
 }
 
